@@ -1,15 +1,27 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import SignupForm from '@/components/SignupForm'
+import VueRouter from 'vue-router'
+import LoginComponent from "../views/login.vue"
+import SecureComponent from "../views/secure.vue"
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'SignupForm',
-      component: SignupForm
-    }
-  ]
+export default new VueRouter({
+    routes: [
+        {
+            path: '/',
+            redirect: {
+                name: "login"
+            }
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: LoginComponent
+        },
+        {
+            path: "/secure",
+            name: "secure",
+            component: SecureComponent
+        }
+    ]
 })
