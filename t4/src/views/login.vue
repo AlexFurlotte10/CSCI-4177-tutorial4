@@ -1,7 +1,7 @@
 <template>
     <div id="login">
         <h1>Login</h1>
-        <input type="text" name="email" v-model="input.email" placeholder="Username" />
+        <input type="text" name="email" v-model="input.email" placeholder="email" />
         <input type="password" name="password" v-model="input.password" placeholder="Password" />
         <button type="button" v-on:click="login()">Login</button>
     </div>
@@ -20,7 +20,7 @@
         },
         methods: {
             login() {
-                if(this.input.username != "" && this.input.password != "") {
+                if(this.input.email != "" && this.input.password != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password) {
                         this.$emit("authenticated", true);
                         this.$router.replace({ name: "secure" });

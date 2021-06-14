@@ -2,19 +2,19 @@
 <div class="get" v-if="list.length">
     <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Year</th>
-            <th>Color</th>
-            <th>Value</th>
+            <th>Title</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Picture</th>
+         
         </tr>
         <tbody v-for="item in list" :key="item.id">
             <tr>
-                <td>{{item.id}}</td>
-                <td>{{item.Name}}</td>
-                <td>{{item.Year}}</td>
-                <td>{{item.Color}}</td>
-                <td>{{item.pantone_Value}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td><img :src="path+'https://tutorial4-api.herokuapp.com/api/users/'+item.picture" class="img-circle" alt="Services"></td>
+               
             </tr>
         </tbody>
     </table>
@@ -23,6 +23,8 @@
 
 <script>
    import axios from 'axios';
+
+    
 
    export default {
        name: 'Get',
