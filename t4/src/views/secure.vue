@@ -1,5 +1,9 @@
 <template>
 <div class="get" v-if="list.length">
+    <input type="text" v-model="search" placeholder="search users"/>
+    <div v-for="item in filteredItems" :key="item.id">
+        <h2>item.firstName</h2>
+    </div>
     <table>
         <tr>
             <th>Title</th>
@@ -10,10 +14,12 @@
         </tr>
         <tbody v-for="item in list" :key="item.id">
             <tr>
-                <td>{{item.title}}</td>
-                <td>{{item.firstName}}</td>
-                <td>{{item.lastName}}</td>
-                <td><img :src="path+'https://tutorial4-api.herokuapp.com/api/users/'+item.picture" class="img-circle" alt="Services"></td>
+                
+               <th> {{item.title}}</th>
+               <th> {{item.firstName}}</th>
+                <th>{{item.lastName}}</th>
+                <th>{{item.picture}}</th>
+                <th><button v-on:click="details()">Profile</button></th>
                
             </tr>
         </tbody>
@@ -28,16 +34,33 @@
 
    export default {
        name: 'Get',
-       data() {
+       data() { 
            return {
-               list: []
+               list: [],
+               search: ''
            }
        },
        async mounted() {
            const result = await axios.get("https://tutorial4-api.herokuapp.com/api/users/");
            this.list= result.data.data;
-       }
+       },
+       methods: {
+       details() {
+                
+                        this.$emit("authenticated", true);
+                        this.$router.replace({ name: "Home" });
+                   
+            },
+        computed: {
+            filteredItems: function(){
+                return this.list.filter((item) => {
+                    return item.firstName.match(this.search)
+                });
+            }
    }
+   }
+   }
+   
 </script>
 
 <style scoped>

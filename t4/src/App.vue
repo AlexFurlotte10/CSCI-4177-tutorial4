@@ -34,7 +34,8 @@
                 this.authenticated = false;
             }
         }
-    }
+        }
+    
 </script>
 
 <style>
