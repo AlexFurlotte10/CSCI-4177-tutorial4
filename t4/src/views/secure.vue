@@ -1,6 +1,15 @@
 <template>
 <div class="get" v-if="list.length">
-    <input type="text" v-model="search" placeholder="search users"/>
+    <div class="search-bar">
+        <b-form-input
+          @input="search_text()"
+          v-model="search.text"
+          type="text"
+          placeholder="Search by Name"
+        ></b-form-input>
+      
+
+      </div>
     <div v-for="item in filteredItems" :key="item.id">
         <h2>item.firstName</h2>
     </div>
@@ -51,13 +60,19 @@
                         this.$router.replace({ name: "Home" });
                    
             },
-        computed: {
-            filteredItems: function(){
-                return this.list.filter((item) => {
-                    return item.firstName.match(this.search)
-                });
-            }
-   }
+        search_text() {
+      //console.log(this.search.text);
+var inside = this;
+this.item = this.list.filter(function(item) {
+        if (
+          item.place
+            .toLowerCase()
+            .indexOf(inside.search.text.toLowerCase()) != "-1"
+        ) {
+          return item;
+        }
+      });
+    },
    }
    }
    
